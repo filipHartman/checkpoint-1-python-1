@@ -9,6 +9,7 @@ def bubble_sort(myList):
                 myList[j], myList[j+1] = myList[j+1], myList[j]
     return myList
 
+
 """
 This module should use random module to generate_id
 """
@@ -31,6 +32,7 @@ def import_data_from_file(filename='class_data.txt'):
         for line in data_file:
             students_data.append(list(line.strip("\n").split(",")))
     return students_data
+
 
 def export_to_file(data, filename='class_data.txt', mode='a'):
     """
@@ -120,7 +122,6 @@ def get_youngest_student(students):
     return youngest_student
 
 
-
 def get_youngest_student_of_class(students, class_name):
     """
     Get youngest student from given class
@@ -138,6 +139,7 @@ def get_youngest_student_of_class(students, class_name):
     """
     students_from_given_class = get_students_of_class(students, class_name)
     return get_youngest_student(students_from_given_class)
+
 
 def get_oldest_student(students):
     """
@@ -195,6 +197,16 @@ def get_average_grade_of_students(students):
     :returns: average grade of students value
     :rtype: float
     """
+    grade_column = 5
+    sum_of_grades = 0
+    number_of_students = 0
+
+    for student_data in students:
+        sum_of_grades += int(student_data[grade_column])
+        number_of_students += 1
+    average_grade = sum_of_grades / number_of_students
+
+    return average_grade
 
 
 def get_average_presence_of_students(students):
@@ -212,6 +224,14 @@ def get_average_presence_of_students(students):
     :returns: average presence of students rounded to int
     :rtype: int
     """
+    presence_column = 6
+    sum_of_presence = 0
+    number_of_students = 0
+    for student_data in students:
+        sum_of_presence += int(student_data[presence_column])
+        number_of_students += 1
+    average_presence = round(sum_of_presence / number_of_students)
+    return average_presence
 
 
 def generate_id(current_ids):
