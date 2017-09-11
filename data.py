@@ -1,4 +1,14 @@
 import csv
+import string
+import random
+
+
+def bubble_sort(myList):
+    for i in range(0, len(myList) - 1):
+        for j in range(0, len(myList) - 1 - i):
+            if myList[j] > myList[j+1]:
+                myList[j], myList[j+1] = myList[j+1], myList[j]
+    return myList
 
 
 """
@@ -259,6 +269,15 @@ def generate_id(current_ids):
     :returns: unique id
     :rtype: str
     """
+    while True:
+        up_letter = random.choice(string.ascii_uppercase)
+        digit = str(random.randint(0, 9))
+        symbol = random.choice(string.punctuation)
+        low_letter = random.choice(string.ascii_lowercase)
+        new_id = up_letter + digit + symbol + low_letter
+
+        if new_id not in current_ids:
+            return new_id
 
 
 def get_all_by_gender(students, gender):
@@ -280,6 +299,20 @@ def get_all_by_gender(students, gender):
     :returns: list of students filtered by given gender
     :rtype: list
     """
+    name_column = 1
+    choosen_gender_student = []
+    if gender == "female":
+        for student_data in students:
+            if student_data[name_column][-1] == "a":
+                choosen_gender_student.append(student_data)
+    elif gender == "male":
+        for student_data in students:
+            if student_data[name_column][-1] != "a":
+                choosen_gender_student.append(student_data)
+    else:
+        raise ValueError("Wrong gender")
+
+    return choosen_gender_student
 
 
 def sort_students_by_age(students, order=None):
@@ -303,3 +336,10 @@ def sort_students_by_age(students, order=None):
     :returns: sorted students or empty list
     :rtype: list
     """
+    sorted_students_list = []
+    if order == None:
+        return sorted_students_list
+    elif order == "asc":
+        pass
+    elif order == "desc":
+        pass
