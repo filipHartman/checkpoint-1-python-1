@@ -1,15 +1,6 @@
 import csv
 
 
-def bubble_sort(myList):
-    """Added buble sort function in case if use sort() is forbiden"""
-    for i in range(0, len(myList) - 1):
-        for j in range(0, len(myList) - 1 - i):
-            if myList[j] > myList[j+1]:
-                myList[j], myList[j+1] = myList[j+1], myList[j]
-    return myList
-
-
 """
 This module should use random module to generate_id
 """
@@ -77,7 +68,7 @@ def get_student_by_id(uid, students):
     for student_data in students:
         if student_data[id_column] == uid:
             return student_data
-
+    raise ValueError("Student does not exist!")
 
 def get_students_of_class(students, class_name):
     """
