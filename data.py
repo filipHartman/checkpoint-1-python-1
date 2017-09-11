@@ -269,14 +269,18 @@ def generate_id(current_ids):
     :returns: unique id
     :rtype: str
     """
+    uid_list = []
+    for item in current_ids:
+        uid_list.append(item)
     while True:
+
         up_letter = random.choice(string.ascii_uppercase)
         digit = str(random.randint(0, 9))
         symbol = random.choice(string.punctuation)
         low_letter = random.choice(string.ascii_lowercase)
         new_id = up_letter + digit + symbol + low_letter
 
-        if new_id not in current_ids:
+        if new_id not in uid_list:
             return new_id
 
 
@@ -367,5 +371,3 @@ def sort_students_by_age(students, order=None):
     else:
         raise ValueError("Wrong order")
     return sorted_students_list
-
-print(sort_students_by_age(import_data_from_file("test_class_data.txt"), "asc"))
