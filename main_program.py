@@ -40,7 +40,6 @@ def delete_student_by_id(students, uid):
     return updated_students
 
 
-
 def main():
     """
     Calls all interaction between user and program, handles program menu
@@ -63,55 +62,53 @@ def main():
     print("Hello to JERZYBOT. Please select your option")
 
     while True:
-        try:
-            display.print_program_menu(menu_options)
-            choice = int(input("Choose: "))
+
+        display.print_program_menu(menu_options)
+        choice = input("Choose: ")
+        os.system("clear")
+
+        students = data.import_data_from_file()
+        if choice == "0":
+            display.print_students_list(students)
+            input("Enter any key ")
             os.system("clear")
 
-            students = data.import_data_from_file()
-            if choice == 0:
-                display.print_students_list(students)
-                input("Enter any key ")
-                os.system("clear")
+        elif choice == "1":
+            uid = input("Enter ID of student to display his/her data: ")
+            student_data = data.get_student_by_id(uid, students)
+            display.print_student_info(student_data)
+            print("\n")
+            input("Enter any key ")
+            os.system("clear")
 
-            elif choice == 1:
-                uid = input("Enter ID of student to display his/her data: ")
-                student_data = data.get_student_by_id(uid, students)
-                display.print_student_info(student_data)
-                print("\n")
-                input("Enter any key ")
-                os.system("clear")
+        elif choice == "2":
+            uid = input("Enter ID of student to remove his/her data from the list: ")
+            new_list = delete_student_by_id(students, uid)
+            data.export_to_file(new_list, mode="w")
+            print("Data of student with given ID have been removed.")
+            input("Enter any key ")
+            os.system("clear")
 
-            elif choice == 2:
-                uid = input("Enter ID of student to remove his/her data from the list: ")
-                new_list = delete_student_by_id(students, uid)
-                data.export_to_file(new_list, mode="w")
-                print("Data of student with given ID have been removed.")
-                input("Enter any key ")
-                os.system("clear")
+        elif choice == "3":
+            youngest_student_data = data.get_youngest_student(students)
+            display.print_student_info(youngest_student_data)
+            print("\n")
+            input("Enter any key ")
+            os.system("clear")
 
-            elif choice == 3:
-                youngest_student_data = data.get_youngest_student(students)
-                display.print_student_info(youngest_student_data)
-                print("\n")
-                input("Enter any key ")
-                os.system("clear")
+        elif choice == "4":
+            oldest_student_data = data.get_oldest_student(students)
+            display.print_student_info(oldest_student_data)
+            print("\n")
+            input("Enter any key ")
+            os.system("clear")
 
-            elif choice == 4:
-                oldest_student_data = data.get_oldest_student(students)
-                display.print_student_info(oldest_student_data)
-                print("\n")
-                input("Enter any key ")
-                os.system("clear")
+        elif choice == "5":
+            exit()
 
-            elif choice == 5:
-                exit()
+        else:
+            continue
 
-            else:
-                pass
-
-        except ValueError:
-            print("Invalid input!")
 
 
 if __name__ == '__main__':
