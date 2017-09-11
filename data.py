@@ -1,3 +1,5 @@
+import csv
+
 """
 This module should use random module to generate_id
 """
@@ -42,10 +44,9 @@ def export_to_file(data, filename='class_data.txt', mode='a'):
         raise ValueError("Wrong write mode")
 
     with open(filename, mode) as data_file:
+        data_txt_file = csv.writer(data_file, delimiter=",")
         for line in data:
-            for item in line:
-                data_file.write(item + ",")
-            data_file.write("\n")
+            data_txt_file.writerow(line)
 
 
 def get_student_by_id(uid, students):
@@ -61,7 +62,7 @@ def get_student_by_id(uid, students):
     :returns: specific student's data
     :rtype: list
     """
-    
+
 
 def get_students_of_class(students, class_name):
     """
