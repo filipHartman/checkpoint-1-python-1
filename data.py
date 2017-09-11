@@ -75,7 +75,12 @@ def get_students_of_class(students, class_name):
     :returns: students from given class only
     :rtype: list
     """
-
+    class_column = 4
+    students_from_given_class = []
+    for student_data in students:
+        if student_data[class_column] == class_name:
+            students_from_given_class.append(student_data)
+    return students_from_given_class
 
 def get_youngest_student(students):
     """
