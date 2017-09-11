@@ -1,5 +1,14 @@
 import csv
 
+
+def bubble_sort(myList):
+    """Added buble sort function in case if use sort() is forbiden"""
+    for i in range(0, len(myList) - 1):
+        for j in range(0, len(myList) - 1 - i):
+            if myList[j] > myList[j+1]:
+                myList[j], myList[j+1] = myList[j+1], myList[j]
+    return myList
+
 """
 This module should use random module to generate_id
 """
@@ -62,6 +71,10 @@ def get_student_by_id(uid, students):
     :returns: specific student's data
     :rtype: list
     """
+    id_column = 0
+    for student_data in students:
+        if student_data[id_column] == uid:
+            return student_data
 
 
 def get_students_of_class(students, class_name):
@@ -82,6 +95,7 @@ def get_students_of_class(students, class_name):
             students_from_given_class.append(student_data)
     return students_from_given_class
 
+
 def get_youngest_student(students):
     """
     Get youngest student from all classes
@@ -95,6 +109,16 @@ def get_youngest_student(students):
     :returns: youngest student
     :rtype: list
     """
+    birth_year_column = 3
+    youngest_student_birth_year = students[0][birth_year_column]
+    youngest_student = students[0]
+    for student_data in students:
+        if student_data[birth_year_column] > youngest_student_birth_year:
+            youngest_student_birth_year = student_data[birth_year_column]
+            youngest_student = student_data
+
+    return youngest_student
+
 
 
 def get_youngest_student_of_class(students, class_name):
@@ -112,7 +136,8 @@ def get_youngest_student_of_class(students, class_name):
     :returns: youngest student from given class
     :rtype: list
     """
-
+    students_from_given_class = get_students_of_class(students, class_name)
+    return get_youngest_student(students_from_given_class)
 
 def get_oldest_student(students):
     """
