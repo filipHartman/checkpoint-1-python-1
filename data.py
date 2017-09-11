@@ -152,6 +152,15 @@ def get_oldest_student(students):
     :returns: oldest student
     :rtype: list
     """
+    birth_year_column = 3
+    oldest_student_birth_year = students[0][birth_year_column]
+    oldest_student = students[0]
+    for student_data in students:
+        if student_data[birth_year_column] < oldest_student_birth_year:
+            oldest_student_birth_year = student_data[birth_year_column]
+            oldest_student = student_data
+
+    return oldest_student
 
 
 def get_oldest_student_of_class(students, class_name):
@@ -169,6 +178,8 @@ def get_oldest_student_of_class(students, class_name):
     :returns: oldest student
     :rtype: list
     """
+    students_from_given_class = get_students_of_class(students, class_name)
+    return get_oldest_student(students_from_given_class)
 
 
 def get_average_grade_of_students(students):
