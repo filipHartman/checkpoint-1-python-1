@@ -68,7 +68,9 @@ def get_student_by_id(uid, students):
     for student_data in students:
         if student_data[id_column] == uid:
             return student_data
-    raise ValueError("Student does not exist!")
+    else:
+        raise ValueError("Student does not exist!")
+
 
 def get_students_of_class(students, class_name):
     """
@@ -221,8 +223,12 @@ def get_average_presence_of_students(students):
     for student_data in students:
         sum_of_presence += int(student_data[presence_column])
         number_of_students += 1
-    average_presence = round(sum_of_presence / number_of_students)
-    return average_presence
+    average_presence = str(sum_of_presence / number_of_students)
+    result = int(average_presence.split(".")[0])
+    if average_presence.split(".")[1][0] >= "5":
+        result += 1
+
+    return result
 
 
 def generate_id(current_ids):
