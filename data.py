@@ -336,10 +336,36 @@ def sort_students_by_age(students, order=None):
     :returns: sorted students or empty list
     :rtype: list
     """
+    year_column = 3
     sorted_students_list = []
-    if order == None:
-        return sorted_students_list
+    sorted_years = []
+    years = []
+    if order is None:
+        pass
+
     elif order == "asc":
-        pass
+        for student_data in students:
+            years.append(student_data[year_column])
+        years = bubble_sort(years)
+        for year in years:
+            for student_data in students:
+                if year == student_data[year_column]:
+                    sorted_students_list.append(student_data)
+
     elif order == "desc":
-        pass
+        desc_list = []
+        for student_data in students:
+            years.append(student_data[year_column])
+        years = bubble_sort(years)
+        for year in years:
+            for student_data in students:
+                if year == student_data[year_column]:
+                    desc_list.append(student_data)
+        for item in range(len(desc_list)-1, 0, -1):
+            sorted_students_list.append(desc_list[item])
+
+    else:
+        raise ValueError("Wrong order")
+    return sorted_students_list
+
+print(sort_students_by_age(import_data_from_file("test_class_data.txt"), "asc"))
